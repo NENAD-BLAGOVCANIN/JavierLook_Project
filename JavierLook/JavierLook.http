@@ -1,0 +1,6 @@
+@JavierLook_HostAddress = http://localhost:5058
+
+GET {{JavierLook_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
