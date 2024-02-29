@@ -91,8 +91,11 @@ namespace JavierLook.Controllers
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response { Status = "Error", Message = "User creation failed! Plase check your details." });
+                    new Response { Status = "Error", Message = $"User creation failed! Details: {errors}" });
+            }
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
