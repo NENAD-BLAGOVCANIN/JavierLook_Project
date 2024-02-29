@@ -1,9 +1,11 @@
 ﻿using JavierLook.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace JavierLook.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<IdentityUser>
     {
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
@@ -12,7 +14,11 @@ namespace JavierLook.Data
         }
 
         public DbSet<Booking> bookings { get; set; }
-        public DbSet<User> users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
 
     }
 }
