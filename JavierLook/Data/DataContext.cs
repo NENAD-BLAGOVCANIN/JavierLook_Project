@@ -12,6 +12,7 @@ namespace JavierLook.Data
         }
 
         public DbSet<Booking> bookings { get; set; }
+        public DbSet<User> users { get; set; }
 
     }
 }
